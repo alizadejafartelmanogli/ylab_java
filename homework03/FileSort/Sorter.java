@@ -9,27 +9,25 @@ import java.util.*;
 public class Sorter {
 
     public File sortFile(File dataFile) throws IOException {
-        long[] countMassive;
-        try (Scanner scanner = new Scanner(new FileInputStream(dataFile))) {
-            List<Long> countList = new ArrayList<>();
-            while (scanner.hasNextLong()) {
-                countList.add(scanner.nextLong());
-            }
-            scanner.close();
-            countMassive = new long[countList.size()];
-            for (int i = 0; i < countMassive.length; i++) {
-                countMassive[i] = countList.get(i);
-            }
-            countList.clear();
-            countMassive = sortMassive(countMassive);
+        Scanner scanner = new Scanner(new FileInputStream(dataFile));
+        List<Long> countList = new ArrayList<>();
+        while (scanner.hasNextLong()) {
+            countList.add(scanner.nextLong());
         }
+        scanner.close();
+        long[] countMassive = new long[countList.size()];
+        for (int i = 0; i < countMassive.length; i++) {
+            countMassive[i] = countList.get(i);
+        }
+        countList.clear();
+        countMassive = sortMassive(countMassive);
         File file = new File(dataFile.getName());
-        try (PrintWriter pw = new PrintWriter(file)) {
-            for (long count : countMassive) {
-                pw.println(count);
-            }
-            pw.flush();
+        PrintWriter pw = new PrintWriter(file);
+        for (long count : countMassive) {
+            pw.println(count);
         }
+        pw.flush();
+        pw.close();
         return file;
     }
 
