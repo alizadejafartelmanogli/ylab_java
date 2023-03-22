@@ -11,21 +11,21 @@ public class PasswordValidator {
             try {
                 throw new WrongLoginException(exceptionMessageLogin);
             } catch (WrongLoginException e) {
-                System.err.println(e);
+                e.printStackTrace();
                 return false;
             }
         } else if (exceptionMessagePassword != null) {
             try {
                 throw new WrongPasswordException(getExceptionMessage(password, "Пароль"));
             } catch (WrongPasswordException e) {
-                System.err.println(e);
+                e.printStackTrace();
                 return false;
             }
         } else if (!password.equals(confirmPassword)) {
             try {
                 throw new WrongPasswordException("Пароль и подтверждение не совпадают");
             } catch (WrongPasswordException e) {
-                System.err.println(e);
+                e.printStackTrace();
                 return false;
             }
         }
